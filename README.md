@@ -1,5 +1,5 @@
 # Data-structure
-Study about data structure including open source books
+Study about data structure 
 
 Source
 https://github.com/spinute/ods
