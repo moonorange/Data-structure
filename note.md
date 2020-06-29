@@ -83,15 +83,16 @@ resize() の実装は単純だ。大きさ 2n の新しい配列 b を割り当�
 次の定理は ArrayStack の性能について整理したものだ。
 定理 2.1. ArrayStack は List インターフェースを実装する。
 resize() にかかる時間を無視した場合の ArrayStack における各操作の実行時間を以下にまとめる。
-• get(i) および set(i,x) の実行時間は O(1) である
-• add(i,x) および remove(i) の実行時間は O(1 + n − i) である
+- get(i) および set(i,x) の実行時間は O(1) である
+- add(i,x) および remove(i) の実行時間は O(1 + n − i) である
 空の ArrayStack に対して任意の m 個の add(i,x) および remove(i) からなる操作の列を実行する。
 このとき resize() にかかる時間の合計は O(m) である。
+
 ArrayStack というデータ構造は、Stack インターフェースを実装する効率的な方法である。
 特に、push(x) は add(n,x) に相当し、pop() は remove(n − 1)に相当する。
 これらいずれの操作の償却実行時間も O(1) である。
 
-FastArrayStack：最適化された ArrayStackである。 ArrayStack で主にやっていることは、（add(i,x) と remove(i) のため に）データをシフトすることと、（resize() のために）データをコピーす ることである。実装では、これに for ループを使った。しかし実際には、データのシフトやコピーに特化したもっと効率的な機能が使える。C++ には、std::copy(a0,a1,b) アルゴリズムがある。
+FastArrayStack：最適化された ArrayStackである。 ArrayStack で主にやっていることは、（add(i,x) と remove(i) のため に）データをシフトすることと、（resize() のために）データをコピ-ーすることである。実装では、これに for ループを使った。しかし実際には、データのシフトやコピーに特化したもっと効率的な機能が使える。C++ には、std::copy(a0,a1,b) アルゴリズムがある。
 
 ## ArrayQueue
 
