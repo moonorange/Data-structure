@@ -96,8 +96,66 @@ FastArrayStack：最適化された ArrayStackである。 ArrayStack で主に�
 
 ## ArrayQueue
 
+このデータ構造では、（add(x) によって）追加された要素が、同じ順番で（remove() によって）削除される。
+(Page 35).
+
 仮に無限長の配列aがあればFIFOを簡単に実装できる。
 次に削除する要素を追跡するインデックス j と、キューの要素 数 n を記録しておく。そうすれば、キューの要素は以下の場所に入っている
-```
+
+```c++
 a[j],a[j + 1],...,a[j + n − 1]
 ```
+
+剰余算術は無限長の配列を模倣するのに便利である。i mod a.length が常 に 0,...,a.length − 1 の値を取ることを利用して、配列の中にキューの要素を うまく入れられるのだ。
+
+```c++
+a[j%a.length],a[(j + 1)%a.length],...,a[(j + n − 1)%a.length]
+```
+
+ここでは a を循環配列として使っている。配列の添字が a.length − 1 を超え ると、配列の先頭に戻ってくるわけである。
+(Page 36).
+
+
+
+### 要約
+
+ArrayQueue は、（FIFO の）Queue インターフェースの実装であ る。resize() のコストを無視すると、ArrayQueue は add(x)、remove() の実 行時間は O(1) である。さらに、空の ArrayQueue に対して長さ m の任意の add(x) および remove() からなる操作の列を実行するとき、resize() にかかる時間の合計は O(m) である。
+(Page 39).
+
+## ArrayDeque：配列を使った高速な双方向キュー
+
+両端に対して追加と削除が効率よくできるデータ構造
+ArrayDeque に 対 す る get(i) と set(i,x) は 簡 単 だ 。配 列 の 要 素 a[(j + i) mod a.length] を読み書きすればよい。
+
+```c++
+void add(int i, T x) {
+  if (n + 1 >= a.length) resize();
+  if (i < n/2) { // a[0],..,a[i-1] を左に 1 つずらす
+    j = (j == 0) ? a.length - 1 : j - 1;
+    for (int k = 0; k <= i-1; k++)
+      a[(j+k)%a.length] = a[(j+k+1)%a.length];
+} else { // a[i],..,a[n-1] を右に 1 つずらす
+    for (int k = n; k > i; k--)
+      a[(j+k)%a.length] = a[(j+k-1)%a.length];
+    }
+
+  a[(j+i)%a.length] = x; n++; }
+```
+
+このように要素をずらせば、add(i,x) によって移動する要素の数が高々 min{i,n − i} 個に保証される。そのため、add(i,x) の実行時間は、resize() を無視すれば O(1 + min{i,n − i}) である。 remove(i) も同様に実装できる。i < n/2 かどうかに応じて、左から i 個の要素をいずれも 1 つずつ右にシフトするか、右から n − i − 1 個の要 素をいずれも 1 つずつ左にシフトする。remove(i) の実行時間も、やはり O(1 + min{i,n − i}) である。
+
+(Page 41).
+
+### 要約
+
+resizeの実行時間を無視すれば
+
+- get(i) および set(i,x) の実行時間は O(1) である
+- add(i,x) および remove(i) の実行時間は O(1+min{i,n−i}) である
+
+(Page 42).
+
+
+## DualArrayDeque：2 つのスタックから作った双方向 キュー
+
+
