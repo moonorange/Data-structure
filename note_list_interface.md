@@ -1,48 +1,3 @@
-# Interface
-
-### List Interfaceにまとめられるもの
-
-FIFOキューにおける add(x)、remove() を、それぞれ enqueue(x)、dequeue() と呼ぶ
-
-Stack と呼ぶ場合は、add(x) と remove() のことを、それぞれ push(x) および pop() と呼ぶ。これにより LIFO と FIFO の取り出し規則を区別できる。
-
-FIFO キューと LIFO キュー(スタック)を一般化した Deque というインターフェースもある。
-
-Deque は双方向キューと呼ばれ、先頭と末尾を持った要素の列を表しており、先頭または末尾に要素を追加できる。
-Deque における操作には、addFirst(x)、removeFirst()、addLast(x)、 removeLast()がある
-
-### List Interface
-
-1. size(): リストの長さ n を返す
-2. get(i): xi の値を返す
-3. set(i,x): xi の値を x にする
-4. add(i,x): x を i 番め *2 として追加し、xi,...,xn−1 を後ろにずらす。
-すなわち、j ∈ {i,...,n−1} について xj+1 = xj とし、n をひとつ増やし、xi = x とする
-5. remove(i): xi を削除し、xi+1,...,xn−1 を前にずらす。
-すなわち、j ∈ {i,...,n − 2} について xj = xj+1 とし、n をひとつ減らす
-
-
-### USet Interface
-
-USet インターフェースは、重複がなく順序付けられていない要素の集まりを表現する(USet の U は unordered の意味)。
-USet インターフェースは数学における集合(set)のようなものだ。
-USet には、n 個の互いに相異なる要素が含まれる。つまり、同じ要素が複数入っていることはない。
-また、USet では要素の並び順は決まっていない。USet には以下の操作を実行できる。
-size(): 集合の要素数nを返す
-add(x): 集合の中にx=yを満たすyがなければxを加える。追加されたらtrueを返しされなければfalse
-remove(x): 集合の中にx=yを満たすyがあれば取り除き、そのyを返す。なければnullを返す
-find(x):  集合の中にx=yを満たすyがあればそのyを返す。なければnullを返す
-
-### SSet Interface
-
-SSet インターフェースは順序付けされた要素の集まりを表現する(SSet の S
-は sorted の意味)。SSet には全順序集合の要素が入る。
-全順序集合とは、任意の 2 つの要素 x と y について大小を比較できるような集合をいう。
-SSet は、USet とまったく同じセマンティクスを持つ操作 size()、add(x)、remove(x) をサポートする。
-USet と SSet の違いは find(x) にある。
-find(x): 順序付けられた集合から x の位置を特定する。
-すなわち y ≥ x を満たす最小の要素 y を見つける。もしそのような yが存在すればそれを返し、存在しないなら null を返す
-
 # 実行時間
 
 最悪実行時間(worst-case running time):
@@ -62,10 +17,78 @@ find(x): 順序付けられた集合から x の位置を特定する。
 
 固定資産を使用可能期間にしたがって、少しずつ費用を計上すること
 
+# Interface
+
+## List Interfaceにまとめられるもの
+
+FIFOキューにおける add(x)、remove() を、それぞれ enqueue(x)、dequeue() と呼ぶ
+
+Stack と呼ぶ場合は、add(x) と remove() のことを、それぞれ push(x) および pop() と呼ぶ。これにより LIFO と FIFO の取り出し規則を区別できる。
+
+FIFO キューと LIFO キュー(スタック)を一般化した Deque というインターフェースもある。
+
+Deque は双方向キューと呼ばれ、先頭と末尾を持った要素の列を表しており、先頭または末尾に要素を追加できる。
+Deque における操作には、addFirst(x)、removeFirst()、addLast(x)、 removeLast()がある
+
+## List Interface
+
+1. size(): リストの長さ n を返す
+2. get(i): xi の値を返す
+3. set(i,x): xi の値を x にする
+4. add(i,x): x を i 番め *2 として追加し、xi,...,xn−1 を後ろにずらす。
+すなわち、j ∈ {i,...,n−1} について xj+1 = xj とし、n をひとつ増やし、xi = x とする
+5. remove(i): xi を削除し、xi+1,...,xn−1 を前にずらす。
+すなわち、j ∈ {i,...,n − 2} について xj = xj+1 とし、n をひとつ減らす
+
+
+## USet Interface
+
+USet インターフェースは、重複がなく順序付けられていない要素の集まりを表現する(USet の U は unordered の意味)。
+USet インターフェースは数学における集合(set)のようなものだ。
+USet には、n 個の互いに相異なる要素が含まれる。つまり、同じ要素が複数入っていることはない。
+また、USet では要素の並び順は決まっていない。USet には以下の操作を実行できる。
+size(): 集合の要素数nを返す
+add(x): 集合の中にx=yを満たすyがなければxを加える。追加されたらtrueを返しされなければfalse
+remove(x): 集合の中にx=yを満たすyがあれば取り除き、そのyを返す。なければnullを返す
+find(x):  集合の中にx=yを満たすyがあればそのyを返す。なければnullを返す
+
+## SSet Interface
+
+SSet インターフェースは順序付けされた要素の集まりを表現する(SSet の S
+は sorted の意味)。SSet には全順序集合の要素が入る。
+全順序集合とは、任意の 2 つの要素 x と y について大小を比較できるような集合をいう。
+SSet は、USet とまったく同じセマンティクスを持つ操作 size()、add(x)、remove(x) をサポートする。
+USet と SSet の違いは find(x) にある。
+find(x): 順序付けられた集合から x の位置を特定する。
+すなわち y ≥ x を満たす最小の要素 y を見つける。もしそのような yが存在すればそれを返し、存在しないなら null を返す
+
 
 # 配列を使ったリスト
+C++ のふつうの配列は要素数を保持していないので、要素数を保持する配列のクラス array を定義する
+
+(Page 28).
 
 ## ArrayStack
+
+```c++
+void add(int i, T x) {
+   if (n + 1 >= a.length) resize();
+   for (int j = n; j > i; j--)
+    a[j] = a[j - 1];
+  a[i] = x;
+  n++;
+  }
+```
+(Page 30).
+
+resize()のコストを無視すれば、add(i,x) のコストは x を入れる場所を作るために右にシフトする要素数に比例する。
+つまり、この操作の（resize() のコストを無視した）実行時間は、O(n − i) である。
+
+(Page 30).
+
+remove(i) も同様に実装できる。a[i + 1],...,a[n − 1] を左に 1 つシフトし、 n の値を 1 つ小さくする。
+a.length() >= 3nだった場合resize()を読んでaを小さくする
+計算量はresize()を無視すれば同様にO(n-i)である
 
 - 配列では任意の要素に一定の時間でアクセスできる。そのため、get(i)操作と set(i,x) 操作を定数時間で実行できる
 
@@ -73,10 +96,19 @@ find(x): 順序付けられた集合から x の位置を特定する。
 add(i,x) 操作と remove(i) 操作の実行時間がn と i に依存するのは、これが原因である
 
 - 配列は伸び縮みしない。backing array のサイズより多くの要素をデータ構造に入れるには、新しい配列を割り当てて古い配列の要素をそちらにコピーしなければならず、この操作のコストは大きい
-C++ のふつうの配列は要素数を保持していないので、要素数を保持する配列のクラス array を定義する
 
-resize() の実装は単純だ。大きさ 2n の新しい配列 b を割り当て、n 個の a の 要素を b の先頭の n 個としてコピーする。そして a を b に置き換える。よって、resize() の呼び出し後は a.length = 2n が成り立つ
+resize() の実装は単純。大きさ 2n の新しい配列 b を割り当て、n 個の a の 要素を b の先頭の n 個としてコピーする。そして a を b に置き換える。よって、resize() の呼び出し後は a.length = 2n が成り立つ
 大きさ 2n の配列 b を割り当て、 n 個の要素をコピーする。これには O(n) の時間がかかる。
+```c++
+void resize() {
+   array<T> b(max(2 * n, 1));
+   for (int i = 0; i < n; i++)
+    b[i] = a[i];
+   a = b;
+    }
+```
+
+(Page 32).
 
 ### 要約
 
@@ -114,8 +146,6 @@ a[j%a.length],a[(j + 1)%a.length],...,a[(j + n − 1)%a.length]
 
 ここでは a を循環配列として使っている。配列の添字が a.length − 1 を超え ると、配列の先頭に戻ってくるわけである。
 (Page 36).
-
-
 
 ### 要約
 
@@ -158,4 +188,31 @@ resizeの実行時間を無視すれば
 
 ## DualArrayDeque：2 つのスタックから作った双方向 キュー
 
+DualArray dequeでは front と back という名前の 2 つの ArrayStack を背中合わせに配置 する。
 
+```c++
+ArrayStack<T> front;
+ArrayStack<T> back;
+```
+
+DualArrayDeque では、要素数 n を明示的に保持しない。要素数は n = front.size() + back.size() により求められる。
+
+要素の追加
+```c++
+void add(int i, T x) {
+   if (i < front.size()) {
+     front.add(front.size() - i, x);
+     } else {
+        back.add(i - front.size(), x);
+    }
+    balance();
+}
+```
+balance() のおかげで front.size() と back.size() の差が三倍より大きくなることはない(size() < 2 の場合を除く。
+具体的には、balance() により、 3*front.size() ≥ back.size() かつ 3*back.size() ≥ front.size() であることが保証される。
+
+resize() と balance() のコストを無視すると、DualArrayDeque における各操作の実行時間は次のようになる。
+- get(i) および set(i,x) の実行時間は O(1) である
+- add(i,x) および remove(i) の実行時間は O(1 + min{i,n − i}) である
+また、空の DualArrayDeque に対して長さ m の任意の add(i,x) および remove(i) からなる操作の列を実行するとき、resize() にかかる時間の合 計は O(m) である。
+(Page 48).
