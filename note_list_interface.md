@@ -124,7 +124,12 @@ ArrayStack というデータ構造は、Stack インターフェースを実装
 特に、push(x) は add(n,x) に相当し、pop() は remove(n − 1)に相当する。
 これらいずれの操作の償却実行時間も O(1) である。
 
-FastArrayStack：最適化された ArrayStackである。 ArrayStack で主にやっていることは、（add(i,x) と remove(i) のため に）データをシフトすることと、（resize() のために）データをコピ-ーすることである。実装では、これに for ループを使った。しかし実際には、データのシフトやコピーに特化したもっと効率的な機能が使える。C++ には、std::copy(a0,a1,b) アルゴリズムがある。
+## FastArrayStack
+
+FastArrayStack：最適化された ArrayStackである。
+ArrayStack で主にやっていることは、（add(i,x) と remove(i) のため に）データをシフトすることと、（resize() のために）データをコピ-することである。
+実装では、これに for ループを使った。しかし実際には、データのシフトやコピーに特化したもっと効率的な機能が使える。
+C++ には、std::copy(a0,a1,b) アルゴリズムがある。
 
 ## ArrayQueue
 
@@ -208,6 +213,15 @@ void add(int i, T x) {
     balance();
 }
 ```
+
+でbalance() のコストを無視した add(i,x) の実行時間を求める。 i < front.size() のときは、add(i,x) により front.add(front.size() − i,x) が実行されるだけである。front は ArrayStack なので、この実行時間は次のようになる。
+` O(front.size() − (front.size() − i) + 1) = O(1 + i)`
+
+一方、i ≥ front.size() のときには、add(i,x) により back.add(i − front.size(),x) が実行されるだけである。
+このときの実行時間は次のようになる。
+`O(back.size() − (i − front.size()) + 1) = O(1 + n − i)`
+(Page 45).
+
 balance() のおかげで front.size() と back.size() の差が三倍より大きくなることはない(size() < 2 の場合を除く。
 具体的には、balance() により、 3*front.size() ≥ back.size() かつ 3*back.size() ≥ front.size() であることが保証される。
 
