@@ -17,6 +17,11 @@
 
 固定資産を使用可能期間にしたがって、少しずつ費用を計上すること
 
+### 期待値とは
+
+期待値とは、1回の試行で得られる値の平均値のことで、得られうるすべての値とそれが起こる確率の積を足し合わせたものです。
+
+
 # Interface
 
 ## List Interfaceにまとめられるもの
@@ -226,6 +231,11 @@ void add(int i, T x) {
 
 balance() のおかげで front.size() と back.size() の差が三倍より大きくなることはない(size() < 2 の場合を除く。
 具体的には、balance() により、 3*front.size() ≥ back.size() かつ 3*back.size() ≥ front.size() であることが保証される。
+
+balance() の実行時間は簡単に解析できる。
+balance() によってバランス が調整されるときは、O(n) 個の要素が動かされるので、実行時間は O(n) である。
+
+(Page 47).
 
 resize() と balance() のコストを無視すると、DualArrayDeque における各操作の実行時間は次のようになる。
 - get(i) および set(i,x) の実行時間は O(1) である
