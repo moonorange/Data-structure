@@ -19,7 +19,7 @@
 
 ### 期待値とは
 
-期待値とは、1回の試行で得られる値の平均値のことで、得られうるすべての値とそれが起こる確率の積を足し合わせたものです。
+期待値とは、1回の試行で得られる値の平均値のことで、得られうるすべての値とそれが起こる確率の積を足し合わせたもの。
 
 
 # Interface
@@ -229,13 +229,48 @@ void add(int i, T x) {
 `O(back.size() − (i − front.size()) + 1) = O(1 + n − i)`
 (Page 45).
 
+add(i,x) の実行時間
+```
+O(1 + i) if i < n/4
+O(n) if n/4 ≤ i < 3n/4
+O(1 + n − i) if i ≥ 3n/4
+```
+
 balance() のおかげで front.size() と back.size() の差が三倍より大きくなることはない(size() < 2 の場合を除く。
 具体的には、balance() により、 3*front.size() ≥ back.size() かつ 3*back.size() ≥ front.size() であることが保証される。
 
 balance() の実行時間は簡単に解析できる。
 balance() によってバランス が調整されるときは、O(n) 個の要素が動かされるので、実行時間は O(n) である。
 
+balance() によって要素が動かされてから、次に balance() によって 要素が動かされるまでに、add(i,x) および remove(i) が実行される回数が n/2 − 1 以上であることを示す。
+補題 2.1 の証明と同様に、これを示せば balance() の合計実行時間が O(m) であることを示したことになる。
+
+ここではポテンシャル法（potential method）という技法を使う。
+DualArrayDeque のポテンシャル Φ を、front と back の要素数の差と定義する。
+`Φ = |front.size() − back.size()|`
+次の式が成り立つので、要素を動かす balance() を呼び出した直後のポテンシャル Φ0 は 1 以下である点に注目しよう。
+`Φ0 = |⌊n/2⌋ − ⌈n/2⌉| ≤ 1`
+
 (Page 47).
+
+balance() が呼び出されて要素が動く直前の状況について
+```
+n = front.size() + back.size()
+  < back.size()/3 + back.size()
+  = 4/3 back.size()
+```
+
+```
+Φ1 = back.size() − front.size()
+   > back.size() − back.size()/3
+   = 2 3 back.size()
+   > 2/3 × 3/4n
+   = n/2
+```
+
+以上より、add(i,x) および remove(i) が呼ばれる回数は、それ以前に balance() によって要素が動かされてから Φ1 − Φ0 > n/2−1 以上である。
+
+(Page 48).
 
 resize() と balance() のコストを無視すると、DualArrayDeque における各操作の実行時間は次のようになる。
 - get(i) および set(i,x) の実行時間は O(1) である
