@@ -214,6 +214,8 @@ void add(int i, T x) {
 }
 ```
 
+![](image/arraydeque_add.png)
+
 でbalance() のコストを無視した add(i,x) の実行時間を求める。 i < front.size() のときは、add(i,x) により front.add(front.size() − i,x) が実行されるだけである。front は ArrayStack なので、この実行時間は次のようになる。
 ` O(front.size() − (front.size() − i) + 1) = O(1 + i)`
 
