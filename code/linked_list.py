@@ -54,7 +54,7 @@ class MyLinkedList:
 		"""
 		if index < 0 or self.size < index:
 			print("invalid index")
-			sys.exit(0)
+			return
 
 		current = self.head
 		new_node = Node(val)
@@ -74,7 +74,7 @@ class MyLinkedList:
 		Delete the index-th node in the linked list, if the index is valid.
 		"""
 		if self.__is_invalid_index(index):
-			sys.exit(0)
+			return
 
 		current = self.head
 		for _ in range(index - 1):
@@ -98,3 +98,5 @@ obj.addAtIndex(index, 150)
 print(f"1st value is {obj.head.next.val}")
 obj.deleteAtIndex(index)
 print(f"1st value after delete is {obj.head.next.val}")
+obj.addAtIndex(obj.size + 1, 150)
+obj.deleteAtIndex(obj.size)
