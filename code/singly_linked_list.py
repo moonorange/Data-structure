@@ -1,10 +1,11 @@
 #desgin linked list https://leetcode.com/explore/learn/card/linked-list/209/singly-linked-list/1290/
+#SInfly Linked List
 class Node(object):
     def __init__(self, val):
         self.val: int = val
         self.next: Node = None
 
-class MyLinkedList:
+class SinglyLinkedList:
     def __init__(self):
         """
         Initialize your data structure here.
@@ -73,8 +74,8 @@ class MyLinkedList:
         self.size -= 1
 
 
-# Your MyLinkedList object will be instantiated and called as such:
-obj = MyLinkedList()
+# Your SinglyLinkedList object will be instantiated and called as such:
+obj = SinglyLinkedList()
 val = 5
 obj.addAtHead(val)
 print(f"head value is {obj.head.val}")
