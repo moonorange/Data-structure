@@ -3,7 +3,16 @@
 linked list is a linear data structure.
 There are two types of linked list, singly linked list and doubly linked list.
 
-## Singly linked list
+## Linked list
+
+linked list elements are not stored at a contiguous location; the elements are linked using pointers.
+
+Advantages over arrays
+```
+1) Dynamic size
+2) Ease of insertion/deletion (Need to move all elements after targeted element in array)
+```
+
 
 Implementation is here
 `code/singly_linked_list.py`
