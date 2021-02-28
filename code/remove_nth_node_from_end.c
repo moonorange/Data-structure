@@ -9,27 +9,27 @@
 // My first c solution. Couldn't come with the solution without using "call by reference"
 
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
-    struct ListNode* curr = head;
-    int size = 0;
+	struct ListNode* tmp = head;
+	int size = 0;
     int counter;
 
-    while (curr)
-    {
-        curr = curr->next;
-        size++;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		size++;
     }
     if (size - n <= 0)
     {
         head = head->next;
         return (head);
     }
-    struct ListNode *tmp = head;
+    struct ListNode *curr = head;
     counter = size - n - 1;
     while (counter)
     {
-        tmp = tmp->next;
-        counter--;
+		curr = curr->next;
+		counter--;
     }
-    tmp->next = tmp->next->next;
-    return head;
+	curr->next = curr->next->next;
+	return head;
 }

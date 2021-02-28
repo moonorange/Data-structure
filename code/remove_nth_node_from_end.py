@@ -9,16 +9,26 @@
 
 class Solution:
 	def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-		curr = head
+		tmp = curr = head
 		size = 0
-		while (curr):
-			curr = curr.next
+		while (tmp):
+			tmp = tmp.next
 			size += 1
-		curr = head
 		if (size - n <= 0):
-			head = head.next
-			return head
+			return head.next
 		for _ in range(size - n - 1):
 			curr = curr.next
 		curr.next = curr.next.next
+		return head
+
+	def removeNthFromEnd2(self, head: ListNode, n: int) -> ListNode:
+		fast = slow = head
+		for _ in range(n):
+			fast = fast.next
+		if (fast is None):
+			return head.next
+		while fast.next:
+			fast = fast.next
+			slow = slow.next
+		slow.next = slow.next.next
 		return head
