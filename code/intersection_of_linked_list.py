@@ -16,9 +16,9 @@ Your code should preferably run in O(n) time and use only O(1) memory.
 #         self.val = x
 #         self.next = None
 
-# The first brute force ans
 class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+	# The first brute force O(N**2) ans
+	def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
 		curr_a = headA
 		while (curr_a):
 			curr_b = headB
@@ -28,3 +28,12 @@ class Solution:
 				curr_b = curr_b.next
 			curr_a = curr_a.next
 		return None
+
+	# The solution
+	def	getIntersectionNode2(self, headA: ListNode, headB: ListNode) -> ListNode:
+		ptr_a = headA
+		ptr_b = headB
+		while (ptr_a is not ptr_b):
+			ptr_a = headB if ptr_a is None else ptr_a.next
+			ptr_b = headA if ptr_b is None else ptr_b.next
+		return ptr_a
