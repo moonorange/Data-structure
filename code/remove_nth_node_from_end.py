@@ -21,4 +21,4 @@ class Solution:
 		for _ in range(size - n - 1):
 			curr = curr.next
 		curr.next = curr.next.next
-		return
+		return head
