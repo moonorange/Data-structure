@@ -8,20 +8,26 @@ class Solution:
 	def reverseList(self, head: ListNode) -> ListNode:
 		prev = None
 		while (head):
-			curr = head
-			print(f"curr: {curr.val}")
-			head = head.next
-			print(f"head: {head.val}") if head else print(f"head: {head}")
-			curr.next = prev
-			print(f"curr.next: {curr.next.val}") if curr.next else print(f"curr.next: {curr.next}")
-			prev = curr
+			curr = head #1 2 3
+			head = head.next #2→3　3→None None
+			curr.next = prev #1→None　2→1→None　3→2→1→None
+			prev = curr #1→None 2→1→None 3→2→1→None
 		return prev
 
-
-obj = ListNode(23, ListNode(6, ListNode(15)))
-sol = Solution()
-ans = sol.reverseList(obj)
+last = ListNode(3)
+second = ListNode(2, last)
+first = ListNode(1, second)
 i = 1
+print("before operation")
+head = first
+while (head):
+	print(f"{i}: {head.val}")
+	head = head.next
+	i += 1
+sol = Solution()
+ans = sol.reverseList(first)
+i = 1
+print("after operation")
 while (ans):
 	print(f"{i}: {ans.val}")
 	ans = ans.next
