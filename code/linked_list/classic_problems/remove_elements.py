@@ -2,11 +2,14 @@
 
 class Solution:
     def removeElements(self, head: ListNode, val: int) -> ListNode:
-		head_tmp = head
-		if (head.val == v
-
-		al):
+		while (head and head.val == val):
 			head = head.next
-		while (head):
+		if (head is None):
+			return head
+		head_tmp = head
+		while (head.next):
 			if (head.next.val == val):
-				head
+				head.next = head.next.next
+			else:
+				head = head.next
+		return head_tmp
