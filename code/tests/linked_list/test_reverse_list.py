@@ -1,6 +1,6 @@
 import pytest
 import sys
-from linked_list.reverse.reverse_linked_list import Solution
+from linked_list.classic_problems.reverse_linked_list import Solution
 from linked_list.utils import ListNode
 
 solution_obj = Solution()
